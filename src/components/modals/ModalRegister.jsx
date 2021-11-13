@@ -129,7 +129,7 @@ function ModalRegister(props) {
           </Button>
 
           <Form.Group className="text-center mb-1">
-            Don't have an account? Click{" "}
+            Already have an account? Click{" "}
             <span onClick={switchLogin} className="cursor-link">
               <strong>Here</strong>
             </span>
