@@ -116,7 +116,7 @@ function CreateLink() {
 
       const config = {
         headers: {
-          "Content-type": "multipart/form-data",
+          "Content-type": "application/json",
         },
       };
 
@@ -130,10 +130,14 @@ function CreateLink() {
       formData.set("brandName", formBrand.brandName);
       formData.set("description", formBrand.description);
       formData.set("brandUrl", previewTemplate);
-      formData.set("formLinks", JSON.stringify(links));
+      formData.set("formLinks", links);
 
       // Insert brand and links data
-      const response = await API.post("/publish/" + idUser, formData, config);
+      const response = await API.post(
+        "/publish/" + idUser,
+        JSON.stringify(formData),
+        config
+      );
 
       if (response.data.status == "success") {
         history.push("/my-links");
