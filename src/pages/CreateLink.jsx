@@ -116,7 +116,7 @@ function CreateLink() {
 
       const config = {
         headers: {
-          "Content-type": `multipart/form-data; boundary=${formData._boundary}`,
+          "Content-type": "multipart/form-data",
         },
       };
 
