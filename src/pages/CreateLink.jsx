@@ -58,7 +58,7 @@ function CreateLink() {
   const getHost = async () => {
     try {
       const response = await API.get("/host");
-      setHost(response?.data?.data);
+      setHost(response?.data?.data + "wayslink/");
     } catch (error) {
       console.log(error);
     }
@@ -140,7 +140,6 @@ function CreateLink() {
 
       // Insert brand and links data
       const response = await api2.post("/publish/" + idUser, config);
-      console.log(response);
 
       if (response.status == "success") {
         history.push("/my-links");
