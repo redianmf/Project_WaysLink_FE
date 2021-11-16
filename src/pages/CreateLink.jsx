@@ -9,7 +9,9 @@ import {
   Alert,
 } from "react-bootstrap";
 import { useHistory, useParams } from "react-router";
+import { useMutation } from "react-query";
 
+import { API2 } from "../config/api2";
 import { API } from "../config/api";
 
 import PanelLeft from "../components/PanelLeft";
@@ -24,6 +26,7 @@ function CreateLink() {
   // Using params to create brand link
   const { id } = useParams();
   const previewTemplate = "preview-template-" + id;
+  let api2 = API2();
 
   // Declare states
   let history = useHistory();
@@ -110,15 +113,9 @@ function CreateLink() {
     setLinkImage(linkImage.filter((item, idx) => index !== idx));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = useMutation(async (e) => {
     try {
       e.preventDefault();
-
-      const config = {
-        headers: {
-          "Content-type": "multipart/form-data",
-        },
-      };
 
       // Store data with FormData as object
       const formData = new FormData();
@@ -132,8 +129,18 @@ function CreateLink() {
       formData.set("brandUrl", previewTemplate);
       formData.set("formLinks", JSON.stringify(links));
 
+      // Add config
+      const config = {
+        method: "POST",
+        headers: {
+          Authorization: "Basic " + localStorage.token,
+        },
+        body: formData,
+      };
+
       // Insert brand and links data
-      const response = await API.post("/publish/" + idUser, formData, config);
+      const response = await api2.post("/publish/" + idUser, config);
+      console.log(response);
 
       if (response.data.status == "success") {
         history.push("/my-links");
@@ -143,7 +150,7 @@ function CreateLink() {
       setMessage(alert);
       console.log(error);
     }
-  };
+  });
 
   return (
     <div className="container-grey">
@@ -161,7 +168,7 @@ function CreateLink() {
                 </Col>
                 <Col sm={2}>
                   <Button
-                    onClick={handleSubmit}
+                    onClick={(e) => handleSubmit.mutate(e)}
                     className="landing-tagline btn-publish"
                   >
                     Publish Link

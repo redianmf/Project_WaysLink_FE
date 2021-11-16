@@ -1,4 +1,4 @@
-export const API = () => {
+export const API2 = () => {
   const baseUrl = process.env.SERVER_URL ||
     "https://redian-ways-link.herokuapp.com/api/v1" ||
     "http://localhost:5000/api/v1/",;
