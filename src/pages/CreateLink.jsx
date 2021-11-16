@@ -121,8 +121,8 @@ function CreateLink() {
       const formData = new FormData();
       formData.set(
         "brandImage",
-        formBrand.brandImage[0],
-        formBrand.brandImage[0].name
+        formBrand?.brandImage[0],
+        formBrand?.brandImage[0]?.name
       );
       formData.set("brandName", formBrand.brandName);
       formData.set("description", formBrand.description);
