@@ -142,7 +142,7 @@ function CreateLink() {
       const response = await api2.post("/publish/" + idUser, config);
       console.log(response);
 
-      if (response.data.status == "success") {
+      if (response.status == "success") {
         history.push("/my-links");
       }
     } catch (error) {
